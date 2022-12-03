@@ -29,6 +29,7 @@ namespace WPFReactiveUI.View
             {
                 d(this.WhenAnyValue(x => x.ViewModel).BindTo(this, x => x.DataContext));
                 d(this.BindCommand(ViewModel, vm => vm.NavigateToExcelParser, view => view.navigateButton));
+                //d(this.BindCommand(ViewModel, vm => vm.MessageCommand, view => view.messageButton));
             });
         }
 
