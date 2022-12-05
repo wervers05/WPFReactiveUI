@@ -42,13 +42,13 @@ namespace WPFReactiveUI.ViewModel
         //private string _region;
         //private DateTime _dateFrom;
         //private DateTime _dateTo;
-        private ExcelViewModel _ExcelVM;
+        //private ExcelViewModel _ExcelVM;
 
-        public ExcelViewModel ExcelVM
-        {
-            get { return _ExcelVM; }
-            set { this.RaiseAndSetIfChanged(ref _ExcelVM, value); }
-        }
+        //public ExcelViewModel ExcelVM
+        //{
+        //    get { return _ExcelVM; }
+        //    set { this.RaiseAndSetIfChanged(ref _ExcelVM, value); }
+        //}
         
         //public DataView ExcelFile
         //{

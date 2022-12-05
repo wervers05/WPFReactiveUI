@@ -20,9 +20,14 @@ namespace WPFReactiveUI.ViewModel
     {
         public ICommand LoadExcelCommand { get; }
         public ICommand FilterDateCommand { get; }
-        public ICommand ClearFilterCommand { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> Back { get; }
+        //public ICommand ClearFilterCommand { get; }
 
+        public DateTime DateFrom { get; }
 
+        public DateTime DateTo { get; }
+        
+        public string Region { get; }
     }
     public class ExcelViewModel : ReactiveObject, IExcelViewModel
     {
@@ -59,14 +64,14 @@ namespace WPFReactiveUI.ViewModel
                         }
                     }
                     FileName = ofd.FileName;
-                    dt = tableCollection?["SalesOrders"];
+                    dt = tableCollection?[0];
                     ExcelFile = dt?.AsDataView();
                 });
             });
 
             FilterDateCommand = ReactiveCommand.Create(FilterByDate);
 
-            ClearFilterCommand = ReactiveCommand.Create(ClearAllFilter);
+            //ClearFilterCommand = ReactiveCommand.Create(ClearAllFilter);
             #region <>
             //OpenFileCommand = ReactiveCommand.CreateFromObservable(() => OpenFileInteractions.FileDialog.Handle());
 
@@ -218,7 +223,7 @@ namespace WPFReactiveUI.ViewModel
 
         public ICommand LoadExcelCommand { get; }
         public ICommand FilterDateCommand { get; }
-        public ICommand ClearFilterCommand { get; }
+        //public ICommand ClearFilterCommand { get; }
         #endregion
 
         #region <Methods>
@@ -234,7 +239,7 @@ namespace WPFReactiveUI.ViewModel
 
         private void FilterByDate()
         {
-            dv = ExcelFile;
+            DataView dv = _excelFile;
             if (dv != null)
             {
                 dv.RowFilter = $"OrderDate >= '{DateFrom}' AND OrderDate <= '{DateTo}'";

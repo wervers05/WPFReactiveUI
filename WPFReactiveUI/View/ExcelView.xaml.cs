@@ -1,26 +1,27 @@
 ﻿using ReactiveUI;
 using System.Data;
+using System.Windows;
 using System.Windows.Controls;
+using WPFReactiveUI.ViewModel;
 
 namespace WPFReactiveUI.View
 {
     /// <summary>
     /// Interaction logic for ExcelView.xaml
     /// </summary>
-    public partial class ExcelView
+    public partial class ExcelView : IViewFor<IExcelViewModel>
     {
         public ExcelView()
         {
             InitializeComponent();
-
             this.WhenActivated(d =>
             {
                 d(this.WhenAnyValue(x => x.ViewModel).BindTo(this, x => x.DataContext));
                 // Property Bindings
                 d(this.Bind(ViewModel, vm => vm.DateFrom, view => view.dtpFrom.SelectedDate));
                 d(this.Bind(ViewModel, vm => vm.DateTo, view => view.dtpTo.SelectedDate));
-                d(this.Bind(ViewModel, vm => vm.Region, view => view.cmbFilterRegion.SelectedValue));
-                d(this.OneWayBind(ViewModel, vm => vm.FileName, view => view.fileNameTextBox.Text));
+                //d(this.Bind(ViewModel, vm => vm.Region, view => view.cmbFilterRegion.SelectedValue));
+                //d(this.OneWayBind(ViewModel, vm => vm.FileName, view => view.fileNameTextBox.Text));
                 //d(this.WhenAnyValue(vm => vm.ViewModel.ExcelFile).BindTo(this, view => view.excelDataGrid.ItemsSource));
                 //d(this.WhenAnyValue(vm => vm.ViewModel.Regions).BindTo(this, view => view.cmbFilterRegion.ItemsSource));
 
@@ -40,6 +41,20 @@ namespace WPFReactiveUI.View
                 //d(this.BindCommand(ViewModel, vm => vm.ImportExcelCommand, view => view.btnOpenFileDialog));
             });
 
+        }
+        public IExcelViewModel ViewModel
+        {
+            get { return (IExcelViewModel)GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
+        }
+
+        public static readonly DependencyProperty ViewModelProperty =
+            DependencyProperty.Register("ViewModel", typeof(IExcelViewModel), typeof(ExcelView), new PropertyMetadata(null));
+
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (ExcelViewModel)value; }
         }
     }
 }
