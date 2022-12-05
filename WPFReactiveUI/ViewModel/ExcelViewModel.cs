@@ -1,5 +1,4 @@
 ﻿using ReactiveUI;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Data;
 using System.Reactive;
 using System;
@@ -12,7 +11,6 @@ using System.Threading.Tasks;
 using ExcelDataReader;
 using System.Text;
 using System.IO;
-using System.Security.Cryptography;
 
 namespace WPFReactiveUI.ViewModel
 {

@@ -1,15 +1,9 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Reactive.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using WPFReactiveUI.Interactions;
-
 namespace WPFReactiveUI.ViewModel
 {
     public interface IMainViewModel : IRoutableViewModel
